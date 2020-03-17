@@ -119,12 +119,9 @@ app.get("/auth/google/callback", (req, res)=>{
       }else {
         let credential = firebase.auth.GoogleAuthProvider.credential(token.id_token);
         firebase.auth().signInWithCredential(credential).then(()=> setCookies(res))
-        .catch(err=>{
-          console.log(err);
-          res.redirect("/");
-        })
+        .catch(err=>{console.log(err); res.redirect("/");})
       }
-    })
+    });
   }
 });
 

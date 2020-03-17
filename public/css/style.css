@@ -13,7 +13,7 @@ html, body{
     display: block;
     width: 10rem;
     height: auto;
-    margin: 100px auto 2rem;
+    margin: 5rem auto 2rem;
     filter: invert(0.5) sepia(1) saturate(5) hue-rotate(90deg);
 }
 
