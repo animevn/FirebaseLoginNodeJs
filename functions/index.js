@@ -52,14 +52,33 @@ app.get("/signin", (req, res)=>{
   res.render("signin");
 });
 
+app.post("/signin", (req, res)=>{
+  const email = req.body.email;
+  const password = req.body.password;
+  firebase.auth().signInWithEmailAndPassword(email, password).then(()=>setCookies(res))
+  .catch(err=>{
+    console.log(err);
+    res.redirect("/");
+  });
+});
+
 app.get("/register", (req, res)=>{
   res.render("register");
+});
+
+app.post("/register", (req, res)=>{
+  const email = req.body.email;
+  const password = req.body.password;
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(()=>setCookies(res))
+  .catch(err=>{
+    console.log(err);
+    res.redirect("/");
+  })
 });
 
 app.get("/google-auth", (req, res)=>{
   const url = oAuth2Client.generateAuthUrl({
     access_type: "offline",
-
     //userinfo.email and userinfo.profile are minimum needed to access user profile
     scope: ["https://www.googleapis.com/auth/userinfo.email",
       "https://www.googleapis.com/auth/userinfo.profile"]
@@ -127,6 +146,17 @@ app.get("/logout", (req, res)=>{
     admin.auth().verifySessionCookie(sessionCookie, true).then(decodedClaims=>{
       return admin.auth().revokeRefreshTokens(decodedClaims.sub);
     }).then(()=> res.redirect("/")).catch(()=>res.redirect("/"));
+  }else {res.redirect("/")}
+});
+
+app.get("/delete", (req, res)=>{
+  const sessionCookie = req.cookies.__session || "";
+  res.clearCookie("__session");
+  if (sessionCookie){
+    admin.auth().verifySessionCookie(sessionCookie, true).then(decodedClaims=>{
+      return admin.auth().revokeRefreshTokens(decodedClaims.sub).then(()=>
+        admin.auth().deleteUser(decodedClaims.sub)).then(()=>res.redirect("/"));
+    }).catch(()=>res.redirect("/"));
   }else {res.redirect("/")}
 });
 
