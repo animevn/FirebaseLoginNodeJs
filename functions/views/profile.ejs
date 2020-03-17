@@ -1,0 +1,19 @@
+<%- include("header") -%>
+
+<div class="container">
+  <h1 class="text-center mt-5 mb-5 text-success">My Secret</h1>
+  <h5 class="text-center mt-5 mb-5 text-success"><%= userUID%></h5>
+
+  <div class="row">
+    <div class="btn-group group-button mx-auto col-xl-6 col-lg-7 col-md-9 col-sm-11 col-11">
+      <a class="btn login-button btn-outline-success btn-lg" href="/logout">
+        Logout
+      </a>
+      <a class="btn login-button btn-outline-success btn-lg" href="/delete">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
+
+<%- include("footer") -%>

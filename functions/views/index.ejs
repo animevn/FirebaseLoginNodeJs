@@ -1,0 +1,26 @@
+<%- include("header") -%>
+
+<div class="container">
+  <img class="secret_image" src="/images/key.svg" alt="key">
+  <h1 class="text-center mb-5 text-success">Enter Secret</h1>
+  <div class="row">
+    <div class="btn-group group-button mx-auto col-xl-6 col-lg-7 col-md-9 col-sm-11 col-11">
+      <a class="btn login-button btn-outline-success btn-lg" href="/register">
+        Resgister
+      </a>
+      <a class="btn login-button btn-outline-success btn-lg" href="/signin">
+        Login
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="mx-auto mt-3 col-xl-6 col-lg-7 col-md-9 col-sm-11 col-11">
+      <a class="btn btn-block btn-success btn-lg" href="/google-auth">
+        Sign In with Google Account
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<%- include("footer") -%>
