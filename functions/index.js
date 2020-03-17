@@ -48,6 +48,14 @@ app.get("/", (req,res)=>{
   res.render("index");
 })
 
+app.get("/signin", (req, res)=>{
+  res.render("signin");
+})
+
+app.get("/register", (req, res)=>{
+  res.render("register");
+})
+
 
 
 exports.app = functions.https.onRequest(app);
