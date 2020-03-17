@@ -30,8 +30,25 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
+function checkIfSignedIn(url) {
+  return (req, res, next)=>{
+    if (req.url === url){
+      const sessionCookie = req.cookies.__session || "";
+      admin.auth().verifySessionCookie(sessionCookie, true)
+      .then(()=> res.redirect("/profile"))
+      .catch(()=>next());
+    }else {
+      next();
+    }
+  }
+}
+app.use(checkIfSignedIn("/"));
+
+app.get("/", (req,res)=>{
+  res.render("index");
+})
 
 
 
-
+exports.app = functions.https.onRequest(app);
 
