@@ -65,3 +65,4 @@ node_modules/
 .env
 /functions/firebaseKey.json
 /functions/serviceAccountKey.json
+/functions/googleApiKey.json
